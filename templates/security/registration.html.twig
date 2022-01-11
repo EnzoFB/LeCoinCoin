@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="registration">
+        <h1>Inscription</h1>
+
+        {{ form_start (formRegistration) }}
+
+        {{ form_row (formRegistration.username, {'attr': {'placeholder': "exemple: Enzo"}}) }}
+        {{ form_row (formRegistration.email) }}
+        {{ form_row (formRegistration.password) }}
+        {{ form_row (formRegistration.confirm_password) }}
+        <button type="submit">Créer mon compte !</button>
+
+        {{ form_end (formRegistration) }}
+    </div>
+{% endblock %}

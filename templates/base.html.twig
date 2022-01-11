@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}LeCoinCoin, site de petites annonces gratuites{% endblock %}
+		</title>
+		<link rel="stylesheet" href="{{ asset('css/style.css')}}"> {% block stylesheets %}{% endblock %}
+	</head>
+	<body>
+		<header class="banner">
+			<ul class="nav">
+				<li>
+					<a class="index" href="{{ path('index') }}">LeCoinCoin</a>
+				</li>
+				{% if app.user %}
+				<li>
+					<a class="create" href="{{ path('new') }}"><img src="{{ asset('img/cross.png') }}">Déposer une annonce</a>
+				<li class="search">
+					<img src="{{ asset('img/loupe.png') }}"><input class="search-input" placeholder="Que recherchez-vous ?"></input>
+				</li>
+				<li>
+					<a class="nav-link" href="{{ path('new') }}">Mes recherches</a>
+				</li>
+				<li>
+					<a class="nav-link" href="{{ path('new') }}">Favoris</a>
+				</li>
+				<li>
+					<a class="nav-link" href="{{ path('new') }}">Messages</a>
+				</li>
+				<li>
+					<a class="nav-link" href="{{ path('security_profile') }}">{{ app.user.username }}</a>
+				</li>
+
+				{% else %}
+
+				<li>
+					<a class="create" href="{{ path('security_login') }}"><img src="{{ asset('img/cross.png') }}">Déposer une annonce</a>
+				</li>
+				<li class="search">
+					<img src="{{ asset('img/loupe.png') }}"><input class="search-input" placeholder="Que recherchez-vous ?"></input>
+				</li>
+				<li>
+					<a class="hidden"></a>
+				</li>
+				<li>
+					<a class="hidden"></a>
+				</li>
+				<li>
+					<a class="hidden"></a>
+				</li>
+				<li>
+					<a class="nav-link" href="{{ path('security_login') }}">Se connecter</a>
+				</li>
+				{% endif %}
+			</ul>					
+		</header>
+		
+		<div class="container">
+			{% block body %}{% endblock %}
+		</div>
+		{% block javascripts %}{% endblock %}
+	</body>
+</html>

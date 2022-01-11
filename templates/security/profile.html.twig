@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="profile">
+        <h1>Page de profil: {{ app.user.username }}</h1>
+        <div class="annonces">
+            <h3>Mes annonces</h3>
+            <h4>{{ nbAnnonce }} annonces trouvées:</h4>
+            {% for annonce in annonces %}
+                <article class="article_index">
+                    <img src="{{ annonce.image }}">
+                    <div class="content">
+                        <div class="title">{{ annonce.title }}</div>
+                        <div class="price">{{ annonce.price }} €</div>
+                        <div class="category">{{ annonce.category }}</div>
+                        <div class="location">{{ annonce.location }}</div>
+                        <div class="date">Créer le {{ annonce.createdAt | date('d/m/Y') }} à {{ annonce.createdAt | date('H:i') }}</div>
+                    </div>
+                    <div class="options">
+                        <div class="option">
+                            <a href="{{ path('edit', {'id': annonce.id}) }}">Modifier votre annonnce</a>
+                        </div>
+                        <div class="option">
+                            
+                            <form method="post" action="{{ path('security_delete', {'id': annonce.id}) }}" onsubmit="return confirm('Etes vous sûr de vouloir supprimer votre annonce ?');">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ annonce.id) }}">
+                                <input type="submit" value="Supprimer votre annonce">
+                            </form>
+
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

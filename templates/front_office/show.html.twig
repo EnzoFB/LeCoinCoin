@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ annonce.title }} - {{ annonce.category }}{% endblock %}
+
+{% block body %}
+    <section class="show">
+        <article class="article_show">
+            <p><a href="{{ path('index') }}">Accueil</a> > {{ annonce.title }}</p>
+            <div class="picture">
+                <img src="{{ annonce.image }}" alt="" class="picture">
+            </div>
+            <h2>{{ annonce.title }}</h2>
+            <h3>{{ annonce.price }} €</h3>
+            <div class="metadata">Ecrit le {{ annonce.createdAt | date('d/m/Y') }} à {{ annonce.createdAt | date('H:i') }}</div>
+            <hr>
+            <h3>Critères</h3>
+            <p>Categorie: {{ annonce.category }}</p>
+            <p>Etat: {{ annonce.state }}</p>
+            <hr>
+            <h3>Description</h3>
+            {{ annonce.content | raw }}
+            <hr>
+            <h3>Localisation</h3>
+            {{ annonce.location }}
+        </article>
+        <aside class="user_description">
+            {{ annonce.user }}
+            <hr>
+            <div class="user_contact">
+                {% if app.user %}
+                    <a href="{{ path('index') }}" class="contact_offer">Faire une offre</a>
+                    <a href="{{ path('index') }}" class="contact_message">Envoyer un message</a>
+                    <a href="{{ path('index') }}" class="contact_number">Voir le numéro</a>
+                {% else %}
+                    <a href="{{ path('security_login')}}" class="contact_offer">Faire une offre</a>
+                    <a href="{{ path('security_login')}}" class="contact_message">Envoyer un message</a>
+                    <a href="{{ path('security_login')}}" class="contact_number">Voir le numéro</a>
+                {% endif %}
+            </div>
+        </aside>
+    </section>
+{% endblock %}

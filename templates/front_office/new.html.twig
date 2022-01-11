@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme formAnnonce 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+
+    <div class="new">
+        <h1>Déposer une annonce</h1>
+
+        {{ form_start (formAnnonce) }}
+
+     
+        {{ form_row (formAnnonce.title, {'attr': {'placeholder': "Titre de l'annonce"}}) }}
+        {{ form_row (formAnnonce.category) }}
+        {{ form_row (formAnnonce.state) }}
+        {{ form_row (formAnnonce.content, {'attr': {'placeholder': "Contenu de l'annonce"}}) }}
+        {{ form_row (formAnnonce.location) }}
+        {{ form_row (formAnnonce.image, {'attr': {'placeholder': "URL de l'image"}}) }}
+        {{ form_row (formAnnonce.price) }}
+
+        <button type="submit" class="new_submit">
+            {% if editMode %}
+                Enregistrer
+            {% else %}
+                Ajouer l'annonce
+            {% endif %}
+        </button>
+
+        {{ form_end (formAnnonce) }}
+    </div>
+
+{% endblock %}

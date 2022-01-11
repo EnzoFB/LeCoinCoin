@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<section class="articles">
+    <h1>Annonces trouvées: {{nbAnnonce}} </h1>
+    
+    {% for annonce in annonces %}
+        <a href="{{ path('show', {'id': annonce.id }) }}" class="articles-path">
+            <article class="article_index">
+                <img src="{{ annonce.image }}">
+                <div class="content">
+                    <div class="title">{{ annonce.title }}</div>
+                    <div class="price">{{ annonce.price }} €</div>
+                    <div class="category">{{ annonce.category }}</div>
+                    <div class="location">{{ annonce.location }}</div>
+                    <div class="date">Créer le {{ annonce.createdAt | date('d/m/Y') }} à {{ annonce.createdAt | date('H:i') }}</div>
+                </div>
+            </article>
+        </a>
+        
+    {% else %}
+        <h1>Aucun résultat trouvé</h1>
+    {% endfor %}
+
+</section>
+
+<div class="pagination">
+    {% if page == 1 %}
+        <a class="hidden"></a>
+    {% else %}
+        <a class="previous_page" href="{{ path('index', {'page': page-1 }) }}">Page précédente</a>
+    {% endif %}
+    {% if annonces|length >= nbResult %}
+        <a class="next_page" href="{{ path('index', {'page': page+1 }) }}">Page suivante</a>
+    {% else %}
+        <a class="hidden"></a>
+    {% endif %}
+</div>
+
+{% endblock %}
